@@ -1,7 +1,7 @@
 # F2HabitBreaker
 Basic overlay to prevent the All Army hotkey being clicked in SC2
 
-##[Download](https://github.com/leigholiver/F2HabitBreaker/releases/latest)
+[Download](https://github.com/leigholiver/F2HabitBreaker/releases/latest)
 
 Usage: Unzip and run `F2HabitBreaker.exe`
 
