@@ -44,7 +44,33 @@ class F2HabitBreaker(QMainWindow):
         with open('F2HabitBreaker.csv', 'rt') as csvfile:
             reader = csv.reader(csvfile, delimiter=',', quotechar='|')
             for row in reader:
-                positions.append({ 'resolution': row[0], 'x': int(row[1]), 'y': int(row[2]), 'xOffset': int(row[3]), 'yOffset': int(row[4]) })
+                try: # try to get position with rgba
+                    positions.append({ 
+                        'resolution': row[0], 
+                        'x': int(row[1]), 
+                        'y': int(row[2]), 
+                        'xOffset': int(row[3]), 
+                        'yOffset': int(row[4]),
+                        'r': int(row[5]),
+                        'g': int(row[6]),
+                        'b': int(row[7]),
+                        'a': float(row[8])                    
+                    })
+                except:
+                    try: # if we cant, try to get old style position only
+                        positions.append({ 
+                            'resolution': row[0], 
+                            'x': int(row[1]), 
+                            'y': int(row[2]), 
+                            'xOffset': int(row[3]), 
+                            'yOffset': int(row[4]),     
+                            'r': 0,
+                            'g': 0,
+                            'b': 0,
+                            'a': 1                               
+                        })
+                    except:
+                        pass
         return positions
         
     def placeWindow(self, monitorId):
@@ -67,7 +93,8 @@ class F2HabitBreaker(QMainWindow):
                         position['y'])
             self.move(position['xOffset'] + self.availableMonitors[monitorId]['xOffset'],
                         position['yOffset'] + self.availableMonitors[monitorId]['yOffset'])
-
+            self.setStyleSheet("QMainWindow { background-color: rgba("+str(position['r'])+", "+str(position['g'])+", "+str(position['b'])+", 1); }")
+            self.setProperty("windowOpacity", position['a'] if position['a']>0 else 0.01 )
 
     def quit(self):
         sys.exit()     
