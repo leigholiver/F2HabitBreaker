@@ -1,0 +1,5 @@
+certifi ~= 2020.6.20
+PyQt5 ~= 5.15.1
+PyQt5-sip ~= 12.8.1
+pywin32 ~= 228
+wincertstore ~= 0.2
